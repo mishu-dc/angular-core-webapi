@@ -1,0 +1,11 @@
+div {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+span {
+  padding-right: 50px;
+  cursor: pointer;
+}
+.current {
+  font-weight: bold;
+}

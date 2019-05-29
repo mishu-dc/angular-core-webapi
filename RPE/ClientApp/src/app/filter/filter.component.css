@@ -1,0 +1,17 @@
+table {
+  width: 90%;
+}
+
+table tr{
+  width:100%;
+}
+
+table .right-align{
+  text-align:right;
+}
+
+table span{
+  padding-right:10px;
+}
+
+

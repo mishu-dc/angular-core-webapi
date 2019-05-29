@@ -1,0 +1,6 @@
+<div>
+  <span [ngClass]="{'current': selectedMenu=='summary'}" (click)="onCLick('summary')">Purchase Summary</span>
+  <span [ngClass]="{'current': selectedMenu=='planning'}" (click)="onCLick('planning')">Planning</span>
+  <span [ngClass]="{'current': selectedMenu=='ambis-nbs'}" (click)="onCLick('ambis-nbs')">AMBIS-NBS</span>
+  <span [ngClass]="{'current': selectedMenu=='nbs'}" (click)="onCLick('nbs')">Exists in NBS but not in AMBIS</span>
+</div>

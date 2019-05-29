@@ -1,0 +1,7 @@
+<div>
+  <span [ngClass]="{'current': selectedMenu=='burget'}" (click)="onCLick('burget')">Budget</span>
+  <span [ngClass]="{'current': selectedMenu=='purchase'}" (click)="onCLick('purchase')">Purchases</span>
+  <span [ngClass]="{'current': selectedMenu=='training'}" (click)="onCLick('training')">Training</span>
+  <span [ngClass]="{'current': selectedMenu=='travel'}" (click)="onCLick('travel')">Travel</span>
+  <span [ngClass]="{'current': selectedMenu=='to-do'}" (click)="onCLick('to-do')">My To-Do List</span>
+</div>
