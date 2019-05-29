@@ -9,6 +9,7 @@ export class PurchasePlanning {
   description: string;
   vendor: string;
   can: Entity;
+  canDescription: string;
   objectClass: string;
   planedAmount: number;
   purchaseDate: string;

@@ -1,9 +1,11 @@
 <purchase-navigation></purchase-navigation>
 
-<data-grid [headers]="['Priority','Description','Vendor','Can', 'Object Class', 'Planned Amount','Date', 'Status','Notes','Tags', '']"
-           [columns]="['priority','description','vendor','can.name', 'objectClass', 'planedAmount', 'purchaseDate','status','notes','isTag','']"
+<data-grid [headers]="['Priority','Description','Vendor','CAN', 'Object Class', 'Planned Amount','Date', 'Status','Notes','Tags', 'Actions']"
+           [columns]="['priorityImgUrl','description','vendor','canDescription', 'objectClass', 'planedAmount', 'purchaseDate','status','notes','tagImgUrl','']"
            [column-widths]="[80, 200, 200, 100, 100, 150, 150, 150, 150, 200, 200]"
-           [column-alignment]="['center','left','left','left','left','right','center','center','left','center','center']"
+           [column-types]="['image', 'text', 'text', 'text', 'text', 'currency', 'text', 'text', 'text', 'image', 'actions']"
+           [column-alignments]="['center','left','left','left','left','right','center','center','left','center','center']"
+           [sortable]="[true,true,true,true,true,true,true,true,true,true,false]"
            [pages]="[10,20,50,100]"
            [selected-page-size]="10"
            [sortBy]="description"

@@ -35,7 +35,7 @@ namespace RPE.Helper
             int month = RandomNumber(1, 12);
             int day = RandomNumber(1, 28);
 
-            return new DateTime(year, month, day).ToString("MMM-dd-yyyy");
+            return new DateTime(year, month, day).ToString("MM/dd/yyyy");
         }
 
         private static string GetRandomClass()
@@ -106,7 +106,7 @@ namespace RPE.Helper
 
         private static Can GetRandomCan()
         {
-            int index = RandomNumber(0, CanHelper.Cans.Count);
+            int index = RandomNumber(1, CanHelper.Cans.Count);
             return CanHelper.Cans[index];
         }
 
@@ -137,7 +137,7 @@ namespace RPE.Helper
                         planning.Notes = GetRandomNotes();
                         planning.ObjectClass = GetRandomClass();
                         planning.PlanedAmount = RandomNumber(100, 80000) * 1.0;
-                        planning.Priority = RandomNumber(1, 4);
+                        planning.Priority = RandomNumber(1, 5);
                         planning.PurchaseDate = GetRandomDate();
                         planning.Status = "Planning";
                         planning.Vendor = GetRandomVendor();

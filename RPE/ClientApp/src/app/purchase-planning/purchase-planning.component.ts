@@ -5,6 +5,7 @@ import { FilterArg } from '../../data/FilterArg';
 import { DataGridPagination } from '../../data/DataGridPagination';
 import { DataGridComponent } from '../data-grid/data-grid.component';
 import { PurchasePlanningResponse } from '../../data/PurchasePlanningResponse';
+import { PurchasePlanning } from '../../data/purchasePlanning';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class PurchasePlanningComponent {
   pageChangeArg: DataGridPagination;
   http: HttpClient;
   baseUrl: string;
+  imageBaseUrl: string = "../../assets/images/";
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.http = http;
@@ -28,15 +30,36 @@ export class PurchasePlanningComponent {
   }
 
   getPlanning() {
-    console.log("currentPage:", this.dataGrid.currentPage);
-    console.log("selectedPageSize:", this.dataGrid.selectedPageSize);
- 
-    console.log("filter args:", this.FilterArg);
 
     this.http.get<PurchasePlanningResponse>(this.baseUrl + 'api/PurchasePlanning' + this.getQueryString()).subscribe(result => {
+
+      result.plannings.forEach(planning => {
+        planning.canDescription = planning.can.name;
+        planning.tagImgUrl = planning.isTag ? this.imageBaseUrl + "tag.png" : this.imageBaseUrl + "no-tag.png";
+
+        switch (planning.priority) {
+          case 4:
+            planning.priorityImgUrl = this.imageBaseUrl + "priority_flag-high.png";
+            break;
+          case 3:
+            planning.priorityImgUrl = this.imageBaseUrl + "priority_flag-med.png";
+            break;
+          case 2:
+            planning.priorityImgUrl = this.imageBaseUrl + "priority_flag-low.png";
+            break;
+          case 1:
+            planning.priorityImgUrl = this.imageBaseUrl + "priority_flag-none.png";
+            break;
+        }
+      });
+      let summary = new PurchasePlanning();
+      summary.description = "Total (all pages)";
+      summary.planedAmount = result.totalAmount;
+      result.plannings.push(summary);
+
       this.dataGrid.totalRecords = result.totalCount;
       this.dataGrid.records = result.plannings;
-      console.log(result);
+
       this.dataGrid.reInitialize();
     }, error => console.error(error));
   }
@@ -63,6 +86,7 @@ export class PurchasePlanningComponent {
   filterChanged(eventArg: FilterArg) {
     console.log("filterChanged->");
     this.FilterArg = eventArg;
+    this.dataGrid.currentPage = 1;
     this.getPlanning();
   }
 

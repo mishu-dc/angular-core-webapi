@@ -1,26 +1,27 @@
 table {
-  min-height: 450px;
-  max-height: 450px;
-  width: 100%;
+  min-height: 500px;
+  max-height: 500px;
+  width: 95%;
   display: block;
-  overflow-y: auto; 
+  overflow-y: auto;
   overflow-x: hidden;
+  border-collapse: collapse;
+  border-bottom:none;  
 }
 
+.table th{
+  border-top: none;
+}
+
+table th {
+  cursor: pointer;
+  vertical-align: top;
+}
 
 .fixed-height {
   display: block;
   overflow-y: auto;
   border: thin solid #e0d8d8
-}
-
-th {
-  background-color: #f5f5f5;
-  vertical-align: middle;
-}
-
-table tfoot {
-  background-color: #f5f5f5;
 }
 
 .footer .first {

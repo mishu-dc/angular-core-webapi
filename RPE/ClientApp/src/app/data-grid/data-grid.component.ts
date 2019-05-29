@@ -12,7 +12,9 @@ export class DataGridComponent implements OnInit {
   @Input('headers') headers: string[];
   @Input('columns') columns: string[];
   @Input('column-widths') columnWidths: string[];
-  @Input('column-alignment') columnAlignment: string[];
+  @Input('column-alignments') columnAlignments: string[];
+  @Input('column-types') columnTypes: string[];
+  @Input('sortable') sortable: boolean[];
   @Input('total-records') totalRecords: number;
   @Input('pages') pages: number[];
   @Input('current-page') currentPage: number;

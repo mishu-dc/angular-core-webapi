@@ -30,6 +30,7 @@
     <None Remove="ClientApp\src\data\entity.ts" />
     <None Remove="ClientApp\src\data\filterArg.ts" />
     <None Remove="ClientApp\src\data\purchasePlanning.ts" />
+    <None Remove="ClientApp\src\data\PurchasePlanningResponse.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +38,11 @@
     <TypeScriptCompile Include="ClientApp\src\data\Entity.ts" />
     <TypeScriptCompile Include="ClientApp\src\data\FilterArg.ts" />
     <TypeScriptCompile Include="ClientApp\src\data\PurchasePlanning.ts" />
+    <TypeScriptCompile Include="ClientApp\src\data\PurchasePlanningResponse.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\assets\css\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

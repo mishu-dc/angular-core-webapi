@@ -1,18 +1,21 @@
-<table class="table table-sm table-bordered">
+<table class="table table-sm">
   <thead>
     <tr>
       <th scope="col" *ngFor="let header of headers;index as i;"
-          [style.text-align]="columnAlignment && columnAlignment[i]?columnAlignment[i]:left"
+          [style.text-align]="columnAlignments && columnAlignments[i]?columnAlignments[i]:left"
           [width]="columnWidths && columnWidths[i]?columnWidths[i]:'auto'">
         {{ header }}
+        <i *ngIf="sortable && sortable[i]?sortable[i]:false" class="fas fa-sort"></i>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let record of records">
       <td scope="row" *ngFor="let column of columns;index as i;"
-          [style.text-align]="columnAlignment && columnAlignment[i]?columnAlignment[i]:left">
-        {{ record[column] }}
+          [style.text-align]="columnAlignments && columnAlignments[i]?columnAlignments[i]:left">
+        <span *ngIf="columnTypes && columnTypes[i]==='text'">{{ record[column]  }}</span>
+        <span *ngIf="columnTypes && columnTypes[i]==='currency'">{{ record[column] | currency }}</span>
+        <img *ngIf="columnTypes && columnTypes[i]==='image' && record[column]" [src]="record[column]" alt="no image found" />
       </td>
     </tr>
   </tbody>

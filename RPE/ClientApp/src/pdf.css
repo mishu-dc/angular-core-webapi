@@ -1,0 +1,153 @@
+﻿*, body {font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 11pt;}
+
+
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-bottom: 10pt;
+}
+th, td {
+    padding: 5pt 10pt;
+    text-align: left;
+    vertical-align: top;
+}
+
+table.table {border-top: 1pt solid black; border-bottom: 1pt solid black;}
+table.table td {border-bottom: .5pt solid lightgrey;}
+table.table thead th {border-bottom-color: black;}
+table.table tfoot th {border-bottom-color: black;}
+
+td.label {padding-right: 0;}
+td.def {padding-left: 2pt;}
+
+table.table th, table.table td {border-bottom: .5pt solid lightgrey;}
+
+th.number, td.number {text-align: right;}
+
+table.table th.poolcode, table.table td.poolcode {width: 180pt;}
+table.table th.can, table.table td.can {width: 50pt;}
+table.table th.amount, table.table td.amount {width: 80pt; white-space: nowrap;}
+table.table th.date, table.table td.date {width: 60pt;}
+
+.poolcode-history .table th, .poolcode-history .table td {padding: 5pt 5pt!important;}
+.poolcode-history th.date {width: 75pt!important;}
+.poolcode-history th.can {width: 60pt!important;}
+.poolcode-history th.poolcode {width: 80pt!important;}
+.poolcode-history th.modified-by {width: 50pt!important;}
+.poolcode-history th.system-modified {width: 50pt!important;}
+
+.approval-history th.date, .approval-history td.date {width: 70pt;}
+.approval-history .current {display: block;}
+
+.emails .table th, .emails .table td {padding: 5pt 5pt!important;}
+.emails .subject {width: 90pt!important;}
+.emails .date {width: 75pt!important;}
+.emails .sender {width: 150pt!important;}
+
+
+
+table.section {
+    margin: 20pt 0;
+    border-top: 2pt solid black;
+    border-bottom: 2pt solid black;
+}
+
+table.section > tr > th {
+    padding: 10pt;
+    text-align: center;
+    border-bottom: .5pt solid lightgrey!important;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+/*.supplement-details.section > tr > th,
+.funds.section > tr > th,
+.special-issues.section > tr > th,
+.notes.section > tr > th {border-bottom: .5pt solid lightgrey!important;}*/
+
+
+div.def {padding: 3pt 0 12pt 0;}
+
+.label {color: #888;}
+
+.check .def {color: #888; width: 20pt; padding-left: 0; padding-right: 0;}
+.check .label {color: black; padding-left: 5pt; padding-right: 0;}
+.check .def.yes {color: green; font-weight: bold;}
+
+
+p.h4 {
+    font-size: 14pt;
+    padding: 25pt 0 10pt 0;
+    color: midnightblue;
+}
+
+
+
+
+h1 {
+    font-weight: bold;
+    font-size: 18pt;
+}
+h2 {font-size: 16pt; margin: 20pt 0;}
+
+.header .label.fy {width: 20pt;}
+.header .def.fy {width: 30pt;}
+.header .label.institution {width: 55pt;}
+.header .label.npars-status {width: 80pt; white-space: nowrap;}
+.header .def.npars-status {width: 70pt;}
+
+table.impaccii-details {
+    border-top: .5pt solid black;
+    border-bottom: .5pt solid black;
+}
+table.money-details {border-bottom: .5pt solid grey;}
+table.eoy-details {border-bottom: 2pt solid black}
+.impaccii-details td,
+.money-details td {width: 32%;}
+.impaccii-details .def,
+.money-details .def {margin-bottom: 10pt;}
+
+.impaccii-details .def.pi-name {font-weight: bold;}
+
+.eoy-details  .label {text-align: right; padding-right: 5pt;}
+.eoy-details .label.eoy {width: 30pt;}
+.eoy-details .def.eoy {width: 25pt;}
+.eoy-details .label.eoy-num {width: 110pt;}
+.eoy-details .def.eoy-num {width: 25pt;}
+.eoy-details .label.eoy-rank {width: 70pt;}
+.eoy-details .def.eoy-rank {width: 20pt;}
+.eoy-details .label.eoy-fund {width: 70pt;}
+.eoy-details .def.eoy-fund {width: 70pt;}
+
+.section.supplement-details,
+.section.funds,
+.section.special-issues {page-break-before: always;}
+
+
+
+.supplement-details tr.supplement-section > td {padding: 10pt 10pt 20pt 10pt!important; border-top: .5pt solid lightgrey;}
+.supplement-details h3 {
+    font-size: 14pt;
+    margin: 25pt 0 15pt;
+    color: midnightblue;
+}
+.supplement-section > td > .label {padding: 10pt 0!important;}
+.supplement-details ul {margin: 20pt 0; color: #888;}
+.supplement-details li {padding-left: 5pt;}
+
+table.special-issues-misc {border-top: .5pt solid lightgrey; border-bottom: .5pt solid lightgrey;}
+table.issues-list > tr > td,
+table.special-issues-misc > tr > td,
+table.special-issues-note > tr > td {padding: 0;}
+
+
+.section.notes .notes-table td {padding: 0 10pt 0 10pt;}
+.section.notes .heading td {
+    font-size: 14pt;
+    padding: 15pt 10pt 0pt 10pt;
+    color: midnightblue;
+}
+.section.notes .note-date {padding: 0pt 0 10pt 0!important;}
+.section.notes .note-contents {padding-bottom: 20pt!important;}

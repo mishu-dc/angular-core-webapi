@@ -2,19 +2,19 @@
   <table>
     <tr>
       <td>
-        <span>FY:</span>
+        <span><b>FY:</b></span>
         <select (change)="fiscalYearChanged($event.target.value)">
           <option *ngFor="let year of fiscalYears" value="{{year}}">{{year}}</option>
         </select>
       </td>
       <td>
-        <span>Division/Office:</span>
+        <span><b>Division/Office:</b></span>
         <select (change)="divisionChanged($event.target.value)">
           <option *ngFor="let disivion of divisions" value="{{disivion.id}}">{{disivion.name}}</option>
         </select>
       </td>
       <td>
-        <span>CAN:</span>
+        <span><b>CAN:</b></span>
         <select (change)="canChanged($event.target.value)">
           <option *ngFor="let can of cans" value="{{can.id}}">{{can.name}}</option>
         </select>
