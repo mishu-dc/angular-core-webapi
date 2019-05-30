@@ -6,6 +6,8 @@ import { DataGridPagination } from '../../data/DataGridPagination';
 import { DataGridComponent } from '../data-grid/data-grid.component';
 import { PurchasePlanningResponse } from '../../data/PurchasePlanningResponse';
 import { PurchasePlanning } from '../../data/purchasePlanning';
+import { saveAs } from 'file-saver';
+
 
 
 @Component({
@@ -26,6 +28,20 @@ export class PurchasePlanningComponent {
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.http = http;
     this.baseUrl = baseUrl;    
+  }
+
+  download(url: string) {
+    return this.http.post<Response>(url, { responseType: 'blob' });
+  }
+
+  downloadExcel() {
+    let url: string = this.baseUrl + 'api/PurchasePlanning/export' + this.getQueryString();
+    this.download(url).subscribe(res => {
+      const blob = new Blob([res], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+      
+    });
   }
 
   getPlanning() {
@@ -91,7 +107,7 @@ export class PurchasePlanningComponent {
 
   exportClicked(eventArg: DataGridPagination) {
     this.pageChangeArg = eventArg;
-    this.getPlanning();
+    this.downloadExcel();
   }
 
 }

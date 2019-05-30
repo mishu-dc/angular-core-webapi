@@ -116,7 +116,6 @@ export class DataGridComponent implements OnInit {
 
   exportList() {
     if (this.canExport) {
-       console.log(this.getEventArg());
        this.export.emit(this.getEventArg());
     }    
   }
