@@ -29,13 +29,12 @@ namespace RPE.Helper
             return vendors[index];
         }
 
-        private static string GetRandomDate()
+        private static DateTime GetRandomDate(int year)
         {
-            int year = RandomNumber(2017, 2019);
             int month = RandomNumber(1, 12);
             int day = RandomNumber(1, 28);
 
-            return new DateTime(year, month, day).ToString("MM/dd/yyyy");
+            return new DateTime(year, month, day);
         }
 
         private static string GetRandomClass()
@@ -123,13 +122,14 @@ namespace RPE.Helper
             {
                 if (_plannings == null)
                 {
-                     _plannings = new List<PurchasePlanning>();
+                    _plannings = new List<PurchasePlanning>();
 
                     for (int i = 0; i < 1000; i++)
                     {
                         PurchasePlanning planning = new PurchasePlanning();
                         planning.Id = i + 1;
                         planning.Can = GetRandomCan();
+                        planning.CanDescription = planning.Can.Name;
                         planning.Description = GetRandomDescription();
                         planning.Division = GetRandomDivision();
                         planning.FiscalYear = GetRandomFiscalYear();
@@ -138,7 +138,7 @@ namespace RPE.Helper
                         planning.ObjectClass = GetRandomClass();
                         planning.PlanedAmount = RandomNumber(100, 80000) * 1.0;
                         planning.Priority = RandomNumber(1, 5);
-                        planning.PurchaseDate = GetRandomDate();
+                        planning.PurchaseDate = GetRandomDate(planning.FiscalYear);
                         planning.Status = "Planning";
                         planning.Vendor = GetRandomVendor();
 

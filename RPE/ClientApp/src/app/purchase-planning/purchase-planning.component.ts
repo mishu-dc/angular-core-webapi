@@ -25,8 +25,7 @@ export class PurchasePlanningComponent {
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.http = http;
-    this.baseUrl = baseUrl;
-    
+    this.baseUrl = baseUrl;    
   }
 
   getPlanning() {
@@ -52,6 +51,7 @@ export class PurchasePlanningComponent {
             break;
         }
       });
+
       let summary = new PurchasePlanning();
       summary.description = "Total (all pages)";
       summary.planedAmount = result.totalAmount;
@@ -73,20 +73,24 @@ export class PurchasePlanningComponent {
     this.dataGrid.selectedPageSize ? query += "&pageSize=" + this.dataGrid.selectedPageSize : "";
     this.dataGrid.currentPage ? query += "&pageNo=" + this.dataGrid.currentPage : "";
     this.dataGrid.sortBy ? query += "&sortBy=" + this.dataGrid.sortBy : "";
+    this.dataGrid.sortDir ? query += "&sortDir=" + this.dataGrid.sortDir : "";
 
     return query;
   }
 
   pageChanged(eventArgs: DataGridPagination) {
-    console.log("pageChanged->");
     this.pageChangeArg = eventArgs;
     this.getPlanning();
   }
 
   filterChanged(eventArg: FilterArg) {
-    console.log("filterChanged->");
     this.FilterArg = eventArg;
     this.dataGrid.currentPage = 1;
+    this.getPlanning();
+  }
+
+  exportClicked(eventArg: DataGridPagination) {
+    this.pageChangeArg = eventArg;
     this.getPlanning();
   }
 

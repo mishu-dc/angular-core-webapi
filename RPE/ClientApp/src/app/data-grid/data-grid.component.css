@@ -1,7 +1,7 @@
 table {
-  min-height: 500px;
-  max-height: 500px;
-  width: 95%;
+  min-height: 600px;
+  max-height: 600px;
+  width: 100%;
   display: block;
   overflow-y: auto;
   overflow-x: hidden;
@@ -14,8 +14,11 @@ table {
 }
 
 table th {
-  cursor: pointer;
   vertical-align: top;
+}
+
+table th .sortable {
+    cursor: pointer;
 }
 
 .fixed-height {
@@ -44,4 +47,12 @@ table th {
 .footer .last {
   margin-left: auto;
   margin-right: 20px;
+}
+
+.actions i{
+  margin-right:8px;
+}
+
+.row{
+  margin-left:5px;
 }

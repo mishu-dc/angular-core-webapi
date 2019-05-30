@@ -4,8 +4,15 @@
       <th scope="col" *ngFor="let header of headers;index as i;"
           [style.text-align]="columnAlignments && columnAlignments[i]?columnAlignments[i]:left"
           [width]="columnWidths && columnWidths[i]?columnWidths[i]:'auto'">
-        {{ header }}
-        <i *ngIf="sortable && sortable[i]?sortable[i]:false" class="fas fa-sort"></i>
+        <span *ngIf="sortable && sortable[i] && columns[i]" (click)="onHeaderClick(columns[i])" class="sortable">
+          {{ header }}
+          <i *ngIf="columns[i]!=sortBy" class="fas fa-sort"></i>
+          <i *ngIf="columns[i]==sortBy && sortDir=='asc'" class="fas fa-sort-alpha-down"></i>
+          <i *ngIf="columns[i]==sortBy && sortDir=='desc'" class="fas fa-sort-alpha-up"></i>
+        </span>
+        <span *ngIf="sortable && !sortable[i]">
+          {{ header }}
+        </span>
       </th>
     </tr>
   </thead>
@@ -15,7 +22,13 @@
           [style.text-align]="columnAlignments && columnAlignments[i]?columnAlignments[i]:left">
         <span *ngIf="columnTypes && columnTypes[i]==='text'">{{ record[column]  }}</span>
         <span *ngIf="columnTypes && columnTypes[i]==='currency'">{{ record[column] | currency }}</span>
-        <img *ngIf="columnTypes && columnTypes[i]==='image' && record[column]" [src]="record[column]" alt="no image found" />
+        <span *ngIf="columnTypes && columnTypes[i]==='date'">{{ record[column] | date:'shortDate' }}</span>
+        <span *ngIf="columnTypes && columnTypes[i]==='action'" class="actions">
+          <i title="view details" class="fas fa-ellipsis-h"></i>
+          <i title="add to-do note" class="fas fa-sticky-note"></i>
+          <i title="delete record" class="fas fa-trash-alt"></i>
+        </span>
+        <img *ngIf="columnTypes && columnTypes[i]==='image' && record[column]" [src]="record[column]" alt="no image" />
       </td>
     </tr>
   </tbody>
@@ -23,6 +36,15 @@
     <tr>
       <td [attr.colspan]="footerColSpan">
         <div class="row footer">
+          <label><b>Page Size:</b></label>
+          <select name="pageSizes" (change)="pageSizeChanged($event.target.value)">
+            <option *ngFor="let page of pages" [selected]="page==selectedPageSize">{{page}}</option>
+          </select>
+
+          <label><b>Displaying Page</b></label>
+          <input type="text" [ngModel] [value]="currentPage" (change)="moveTo($event.target.value)">
+          <label><b>of {{pageCount}}</b></label>
+
           <button type="button" class="btn btn-outline-primary first" (click)="moveFirst()" [disabled]="currentPage==1">
             <i class="fa fa-angle-double-left"></i>
           </button>
@@ -30,10 +52,6 @@
           <button type="button" class="btn btn-outline-primary" (click)="previous()" [disabled]="currentPage==1">
             <i class="fa fa-angle-left"></i>
           </button>
-
-          <label><b>Page</b></label>
-          <input type="text" [ngModel] [value]="currentPage" (change)="moveTo($event.target.value)">
-          <label><b>of {{pageCount}}</b></label>
 
           <button type="button" class="btn btn-outline-primary" (click)="next()" [disabled]="currentPage==pageCount">
             <i class="fa fa-angle-right"></i>
@@ -47,9 +65,9 @@
             <i class="fas fa-sync-alt"></i>
           </button>
 
-          <select name="pageSizes" (change)="pageSizeChanged($event.target.value)">
-            <option *ngFor="let page of pages" [selected]="page==selectedPageSize">{{page}}</option>
-          </select>
+          <button  type="button" class="btn btn-outline-primary" (click)="exportList()">
+            <i class="fas fa-file-excel"></i>
+          </button>
 
           <label class="last"><b>Displaying records {{from}}-{{to}} of {{totalRecords}}</b></label>
         </div>

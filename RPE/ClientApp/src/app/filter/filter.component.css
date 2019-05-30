@@ -2,6 +2,10 @@ table {
   width: 90%;
 }
 
+select{
+  margin-right:50px;
+}
+
 table tr{
   width:100%;
 }
@@ -12,6 +16,10 @@ table .right-align{
 
 table span{
   padding-right:10px;
+}
+
+.bars {
+  text-align: right;
 }
 
 

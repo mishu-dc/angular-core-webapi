@@ -11,6 +11,6 @@ namespace RPE.Models
         public int TotalCount { get; set; }
         public double TotalAmount { get; set; }
         public List<PurchasePlanning> Plannings { get; set; }
-       
+
     }
 }

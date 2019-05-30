@@ -15,7 +15,7 @@ namespace RPE.Helper
             {
                 if (_years == null)
                 {
-                    _years = new int[] { 2017, 2018, 2019 };
+                    _years = new int[] { 2019, 2018, 2017 };
                 }
                 return _years;
             }

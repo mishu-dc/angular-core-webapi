@@ -18,10 +18,13 @@ export class DataGridComponent implements OnInit {
   @Input('total-records') totalRecords: number;
   @Input('pages') pages: number[];
   @Input('current-page') currentPage: number;
-  @Input('sortBy') sortBy: string;
+  @Input('sort-by') sortBy: string;
+  @Input('sort-direction') sortDir: string;
   @Input('selected-page-size') selectedPageSize: number;
   @Input('records') records: any[] = [];
+  @Input('can-export') canExport: boolean;
   @Output('page-changed') pageChanged = new EventEmitter();
+  @Output('export-clicked') export = new EventEmitter();
 
   footerColSpan: number;
 
@@ -46,12 +49,12 @@ export class DataGridComponent implements OnInit {
   reInitialize() {
     this.pageCount = Math.ceil(this.totalRecords / this.selectedPageSize);
     this.from = (this.currentPage - 1) * this.selectedPageSize + 1;
-    this.to = this.from + this.selectedPageSize - 1;
+    this.to = (this.from * 1) + (this.selectedPageSize * 1) - 1;
     this.to = this.to > this.totalRecords ? this.totalRecords : this.to;
   }
 
   private getEventArg() {
-    return new DataGridPagination(this.currentPage, this.selectedPageSize, this.sortBy);
+    return new DataGridPagination(this.currentPage, this.selectedPageSize, this.sortBy, this.sortDir);
   }
 
   moveFirst() {
@@ -97,8 +100,25 @@ export class DataGridComponent implements OnInit {
     }
   }
 
+  onHeaderClick(header) {
+    if (this.sortBy === header) {
+      this.sortDir = this.sortDir == "desc"? "asc":"desc";
+    } else {
+      this.sortBy = header
+      this.sortDir = "asc";
+    }
+    this.pageChanged.emit(this.getEventArg());
+  }
+
   refreshList() {
     this.pageChanged.emit(this.getEventArg());
+  }
+
+  exportList() {
+    if (this.canExport) {
+       console.log(this.getEventArg());
+       this.export.emit(this.getEventArg());
+    }    
   }
 
 }

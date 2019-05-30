@@ -11,7 +11,7 @@ namespace RPE.Helper
         private static List<Division> _divisions = null;
         private DivisionHelper()
         {
-            
+
         }
 
         public static List<Division> Divisions

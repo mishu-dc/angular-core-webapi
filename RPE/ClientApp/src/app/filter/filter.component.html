@@ -1,26 +1,25 @@
 <div>
   <table>
     <tr>
-      <td>
+      <td colspan="2">
         <span><b>FY:</b></span>
         <select (change)="fiscalYearChanged($event.target.value)">
           <option *ngFor="let year of fiscalYears" value="{{year}}">{{year}}</option>
         </select>
-      </td>
-      <td>
         <span><b>Division/Office:</b></span>
         <select (change)="divisionChanged($event.target.value)">
           <option *ngFor="let disivion of divisions" value="{{disivion.id}}">{{disivion.name}}</option>
         </select>
-      </td>
-      <td>
         <span><b>CAN:</b></span>
         <select (change)="canChanged($event.target.value)">
           <option *ngFor="let can of cans" value="{{can.id}}">{{can.name}}</option>
-        </select>
+        </select>        
       </td>
-      <td class="right-align">
-        <span>New To-Do Note</span>
+      <td class="bars">
+        <span>
+          <i class="fas fa-bars fa-1x"></i>
+          <span>New To-Do Note</span>
+        </span>
       </td>
     </tr>
   </table>
