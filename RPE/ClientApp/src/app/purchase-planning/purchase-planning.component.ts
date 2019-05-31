@@ -6,9 +6,6 @@ import { DataGridPagination } from '../../data/DataGridPagination';
 import { DataGridComponent } from '../data-grid/data-grid.component';
 import { PurchasePlanningResponse } from '../../data/PurchasePlanningResponse';
 import { PurchasePlanning } from '../../data/purchasePlanning';
-import { saveAs } from 'file-saver';
-
-
 
 @Component({
   selector: 'purchase-planning',
