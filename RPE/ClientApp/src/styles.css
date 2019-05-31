@@ -1180,11 +1180,12 @@ input[type="text"] {
 }
 
 body {
+  margin: auto;
   background-color: #fff;
-  left: 0;
   position: relative;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   max-width: 1366px;
+  width:100%;
 }
 
   body > my-app {
