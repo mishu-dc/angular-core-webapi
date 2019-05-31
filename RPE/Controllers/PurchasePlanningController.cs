@@ -186,16 +186,14 @@ namespace RPE.Controllers
 
             const string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
+            HttpContext.Response.Clear();
             HttpContext.Response.ContentType = contentType;
             HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
             HttpContext.Response.Headers.Add("Content-Disposition", "attachment;filename=" + fileName);
             HttpContext.Response.Headers.Add("Content-Length", bytes.Length.ToString());
 
-            var fileContentResult = new FileContentResult(bytes, contentType)
-            {
-                FileDownloadName = fileName,
-            };            
-
+            var fileContentResult = new FileContentResult(bytes, contentType);
+            
             return fileContentResult;           
         }
     }
