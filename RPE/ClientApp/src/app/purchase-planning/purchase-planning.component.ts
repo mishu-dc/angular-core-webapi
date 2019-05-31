@@ -36,12 +36,7 @@ export class PurchasePlanningComponent {
 
   downloadExcel() {
     let url: string = this.baseUrl + 'api/PurchasePlanning/export' + this.getQueryString();
-    this.download(url).subscribe(res => {
-      const blob = new Blob([res], { type: 'text/csv' });
-      const url = window.URL.createObjectURL(blob);
-      window.open(url);
-      
-    });
+    window.location.href = url;
   }
 
   getPlanning() {

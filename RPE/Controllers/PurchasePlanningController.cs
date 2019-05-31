@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using RPE.Entities;
 using RPE.Helper;
 using RPE.Models;
+using Newtonsoft.Json;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using OfficeOpenXml;
 
 namespace RPE.Controllers
 {
@@ -15,6 +19,12 @@ namespace RPE.Controllers
     [ApiController]
     public class PurchasePlanningController : ControllerBase
     {
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        public PurchasePlanningController(IHostingEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
         [HttpGet]
         public PurchasePlanningModel Get(int fiscalyear, int divisionId, int canId, int pageSize = 10, int pageNo = 1, string sortBy = "id", string sortDir = "asc")
         {
@@ -131,19 +141,62 @@ namespace RPE.Controllers
                     .ToList<PurchasePlanning>();
             }
 
-            var bytes = System.IO.File.ReadAllBytes(@"C:\Users\test\source\repos\RPE\RPE\RPE\Test.xlsx");
+            string rootFolder = _hostingEnvironment.WebRootPath;
+            string fileName = "Purchase_Planning.xlsx";
+            string path = Path.Combine(rootFolder, fileName);
+
+            FileInfo file = new FileInfo(path);
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+
+            using (ExcelPackage package = new ExcelPackage(file))
+            {
+
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Planning");
+                int totalRows = plannings.Count();
+
+                string[] cols = new string[] { "Fiscal_Year",  "Division/Office", "Priority","Description","Vendor", "CAN","Object Class","Planned_Amount","Date","Status","Notes" };
+
+                for(int i = 0;i < cols.Length; i++)
+                {
+                    worksheet.Cells[1, i + 1].Value = cols[i];
+                }
+
+                for (int row = 2,i=0; row <= totalRows + 1; row++,i++)
+                {
+                    worksheet.Cells[row, 1].Value = plannings[i].FiscalYear;
+                    worksheet.Cells[row, 2].Value = plannings[i].Division.Name;
+                    worksheet.Cells[row, 3].Value = plannings[i].Priority;
+                    worksheet.Cells[row, 4].Value = plannings[i].Description;
+                    worksheet.Cells[row, 5].Value = plannings[i].Vendor;
+                    worksheet.Cells[row, 6].Value = plannings[i].CanDescription;
+                    worksheet.Cells[row, 7].Value = plannings[i].ObjectClass;
+                    worksheet.Cells[row, 8].Value = plannings[i].PlanedAmount;
+                    worksheet.Cells[row, 9].Value = plannings[i].PurchaseDate.ToString("mm-dd-yyyy");
+                    worksheet.Cells[row, 10].Value = plannings[i].Status;
+                    worksheet.Cells[row, 11].Value = plannings[i].Notes;
+                }
+
+                package.Save();
+
+            }
+            var bytes = System.IO.File.ReadAllBytes(path);
 
             const string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
             HttpContext.Response.ContentType = contentType;
             HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+            HttpContext.Response.Headers.Add("Content-Disposition", "attachment;filename=" + fileName);
+            HttpContext.Response.Headers.Add("Content-Length", bytes.Length.ToString());
 
             var fileContentResult = new FileContentResult(bytes, contentType)
             {
-                FileDownloadName = "Test.xlsx"
-            };
+                FileDownloadName = fileName,
+            };            
 
-            return fileContentResult;
-            //return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            return fileContentResult;           
         }
     }
 }
