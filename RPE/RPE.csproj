@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -44,6 +44,10 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\assets\css\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RPE.DataAccess\RPE.DataAccess.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

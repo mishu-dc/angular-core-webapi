@@ -174,7 +174,7 @@ namespace RPE.Controllers
                     worksheet.Cells[row, 6].Value = plannings[i].CanDescription;
                     worksheet.Cells[row, 7].Value = plannings[i].ObjectClass;
                     worksheet.Cells[row, 8].Value = plannings[i].PlanedAmount;
-                    worksheet.Cells[row, 9].Value = plannings[i].PurchaseDate.ToString("mm-dd-yyyy");
+                    worksheet.Cells[row, 9].Value = plannings[i].PurchaseDate.ToString("MM-dd-yyyy");
                     worksheet.Cells[row, 10].Value = plannings[i].Status;
                     worksheet.Cells[row, 11].Value = plannings[i].Notes;
                 }
